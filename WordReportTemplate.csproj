@@ -103,6 +103,7 @@
     <EmbeddedResource Include="ThisDocument.resx">
       <DependentUpon>ThisDocument.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="README.md" />
     <None Include="Отчёт.dotm" />
     <Compile Include="ThisDocument.cs">
       <DependentUpon>Отчёт.dotm</DependentUpon>
