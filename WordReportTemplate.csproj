@@ -15,6 +15,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <BootstrapperComponentsLocation>HomeSite</BootstrapperComponentsLocation>
     <ProjectGuid>{B8AA9276-F00A-44E0-B4BB-29C9049AFDE1}</ProjectGuid>
+    <SolutionID>30921357-bbb3-4e75-9ae3-b0ccf21abfb1</SolutionID>
   </PropertyGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.VSTORuntime.4.0">
@@ -104,7 +105,10 @@
       <DependentUpon>ThisDocument.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="README.md" />
+    <None Include="report.exportedUI" />
+    <None Include="WordReportTemplate_TemporaryKey.pfx" />
     <None Include="Отчёт.dotm" />
+    <Compile Include="ReportRibbon.cs" />
     <Compile Include="ThisDocument.cs">
       <DependentUpon>Отчёт.dotm</DependentUpon>
     </Compile>
@@ -137,6 +141,15 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>WordReportTemplate_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>E91F969AD1A24978F35E2A19E2FF530FD9CF6E9A</ManifestCertificateThumbprint>
   </PropertyGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\OfficeTools\Microsoft.VisualStudio.Tools.Office.targets" Condition="'$(VSToolsPath)' != ''" />
