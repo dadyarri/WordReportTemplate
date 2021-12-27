@@ -4,10 +4,10 @@
   <hostitem:hostControl hostitem:name="plainTextContentControl1" hostitem:identifier="plainTextContentControl1" hostitem:type="Microsoft.Office.Tools.Word.PlainTextContentControl" hostitem:primaryCookie="1506628984" hostitem:extenderCookie="" hostitem:modifier="Internal" />
   <hostitem:hostControl hostitem:name="plainTextContentControl1" hostitem:identifier="plainTextContentControl2" hostitem:type="Microsoft.Office.Tools.Word.PlainTextContentControl" hostitem:primaryCookie="1771039477" hostitem:extenderCookie="" hostitem:modifier="Internal" />
   <hostitem:hostControl hostitem:name="plainTextContentControl1" hostitem:identifier="plainTextContentControl4" hostitem:type="Microsoft.Office.Tools.Word.PlainTextContentControl" hostitem:primaryCookie="1827706133" hostitem:extenderCookie="" hostitem:modifier="Internal" />
-  <hostitem:hostControl hostitem:name="plainTextContentControl1" hostitem:identifier="plainTextContentControl5" hostitem:type="Microsoft.Office.Tools.Word.PlainTextContentControl" hostitem:primaryCookie="4040992152" hostitem:extenderCookie="" hostitem:modifier="Internal" />
   <hostitem:hostControl hostitem:name="richTextContentControl1" hostitem:identifier="richTextContentControl1" hostitem:type="Microsoft.Office.Tools.Word.RichTextContentControl" hostitem:primaryCookie="1035700824" hostitem:extenderCookie="" hostitem:modifier="Internal" />
-  <hostitem:hostControl hostitem:name="richTextContentControl1" hostitem:identifier="richTextContentControl2" hostitem:type="Microsoft.Office.Tools.Word.RichTextContentControl" hostitem:primaryCookie="656737330" hostitem:extenderCookie="" hostitem:modifier="Internal" />
   <hostitem:hostControl hostitem:name="richTextContentControl1" hostitem:identifier="richTextContentControl3" hostitem:type="Microsoft.Office.Tools.Word.RichTextContentControl" hostitem:primaryCookie="3864994824" hostitem:extenderCookie="" hostitem:modifier="Internal" />
+  <hostitem:hostControl hostitem:name="plainTextContentControl1" hostitem:identifier="plainTextContentControl6" hostitem:type="Microsoft.Office.Tools.Word.PlainTextContentControl" hostitem:primaryCookie="866951722" hostitem:extenderCookie="" hostitem:modifier="Internal" />
+  <hostitem:hostControl hostitem:name="plainTextContentControl1" hostitem:identifier="plainTextContentControl8" hostitem:type="Microsoft.Office.Tools.Word.PlainTextContentControl" hostitem:primaryCookie="3770182769" hostitem:extenderCookie="" hostitem:modifier="Internal" />
   <hostitem:componentsDeclaration />
   <hostitem:componentsInitialization><![CDATA[<SOAP-ENV:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
 <SOAP-ENV:Body>
@@ -654,7 +654,7 @@
 <comparer xsi:null="1"/>
 </a4:ListDictionary>
 <a1:CodeComment id="ref-118" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/System.CodeDom/System%2C%20Version%3D4.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Db77a5c561934e089">
-<text id="ref-276">plainTextContentControl5</text>
+<text id="ref-276">richTextContentControl1</text>
 <docComment>false</docComment>
 <CodeObject_x002B_userData href="#ref-277"/>
 </a1:CodeComment>
@@ -728,7 +728,7 @@
 <comparer xsi:null="1"/>
 </a4:ListDictionary>
 <a1:CodeComment id="ref-135" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/System.CodeDom/System%2C%20Version%3D4.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Db77a5c561934e089">
-<text id="ref-293">richTextContentControl1</text>
+<text id="ref-293">richTextContentControl3</text>
 <docComment>false</docComment>
 <CodeObject_x002B_userData href="#ref-294"/>
 </a1:CodeComment>
@@ -802,7 +802,7 @@
 <comparer xsi:null="1"/>
 </a4:ListDictionary>
 <a1:CodeComment id="ref-152" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/System.CodeDom/System%2C%20Version%3D4.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Db77a5c561934e089">
-<text id="ref-310">richTextContentControl2</text>
+<text id="ref-310">plainTextContentControl6</text>
 <docComment>false</docComment>
 <CodeObject_x002B_userData href="#ref-311"/>
 </a1:CodeComment>
@@ -876,7 +876,7 @@
 <comparer xsi:null="1"/>
 </a4:ListDictionary>
 <a1:CodeComment id="ref-169" xmlns:a1="http://schemas.microsoft.com/clr/nsassem/System.CodeDom/System%2C%20Version%3D4.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3Db77a5c561934e089">
-<text id="ref-327">richTextContentControl3</text>
+<text id="ref-327">plainTextContentControl8</text>
 <docComment>false</docComment>
 <CodeObject_x002B_userData href="#ref-328"/>
 </a1:CodeComment>

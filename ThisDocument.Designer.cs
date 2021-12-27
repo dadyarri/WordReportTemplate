@@ -25,13 +25,13 @@ namespace WordReportTemplate {
         
         internal Microsoft.Office.Tools.Word.PlainTextContentControl plainTextContentControl4;
         
-        internal Microsoft.Office.Tools.Word.PlainTextContentControl plainTextContentControl5;
-        
         internal Microsoft.Office.Tools.Word.RichTextContentControl richTextContentControl1;
         
-        internal Microsoft.Office.Tools.Word.RichTextContentControl richTextContentControl2;
-        
         internal Microsoft.Office.Tools.Word.RichTextContentControl richTextContentControl3;
+        
+        internal Microsoft.Office.Tools.Word.PlainTextContentControl plainTextContentControl6;
+        
+        internal Microsoft.Office.Tools.Word.PlainTextContentControl plainTextContentControl8;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "16.0.0.0")]
         private global::System.Object missing = global::System.Type.Missing;
@@ -139,10 +139,10 @@ namespace WordReportTemplate {
             this.plainTextContentControl1.BeginInit();
             this.plainTextContentControl2.BeginInit();
             this.plainTextContentControl4.BeginInit();
-            this.plainTextContentControl5.BeginInit();
             this.richTextContentControl1.BeginInit();
-            this.richTextContentControl2.BeginInit();
             this.richTextContentControl3.BeginInit();
+            this.plainTextContentControl6.BeginInit();
+            this.plainTextContentControl8.BeginInit();
         }
         
         /// 
@@ -150,10 +150,10 @@ namespace WordReportTemplate {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "16.0.0.0")]
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         private void EndInitialization() {
+            this.plainTextContentControl8.EndInit();
+            this.plainTextContentControl6.EndInit();
             this.richTextContentControl3.EndInit();
-            this.richTextContentControl2.EndInit();
             this.richTextContentControl1.EndInit();
-            this.plainTextContentControl5.EndInit();
             this.plainTextContentControl4.EndInit();
             this.plainTextContentControl2.EndInit();
             this.plainTextContentControl1.EndInit();
@@ -170,10 +170,10 @@ namespace WordReportTemplate {
             this.plainTextContentControl1 = Globals.Factory.CreatePlainTextContentControl(null, null, "1506628984", "plainTextContentControl1", this);
             this.plainTextContentControl2 = Globals.Factory.CreatePlainTextContentControl(null, null, "1771039477", "plainTextContentControl2", this);
             this.plainTextContentControl4 = Globals.Factory.CreatePlainTextContentControl(null, null, "1827706133", "plainTextContentControl4", this);
-            this.plainTextContentControl5 = Globals.Factory.CreatePlainTextContentControl(null, null, "4040992152", "plainTextContentControl5", this);
             this.richTextContentControl1 = Globals.Factory.CreateRichTextContentControl(null, null, "1035700824", "richTextContentControl1", this);
-            this.richTextContentControl2 = Globals.Factory.CreateRichTextContentControl(null, null, "656737330", "richTextContentControl2", this);
             this.richTextContentControl3 = Globals.Factory.CreateRichTextContentControl(null, null, "3864994824", "richTextContentControl3", this);
+            this.plainTextContentControl6 = Globals.Factory.CreatePlainTextContentControl(null, null, "866951722", "plainTextContentControl6", this);
+            this.plainTextContentControl8 = Globals.Factory.CreatePlainTextContentControl(null, null, "3770182769", "plainTextContentControl8", this);
         }
         
         /// 
@@ -199,21 +199,21 @@ namespace WordReportTemplate {
             // 
             this.plainTextContentControl4.DefaultDataSourceUpdateMode = System.Windows.Forms.DataSourceUpdateMode.Never;
             // 
-            // plainTextContentControl5
-            // 
-            this.plainTextContentControl5.DefaultDataSourceUpdateMode = System.Windows.Forms.DataSourceUpdateMode.Never;
-            // 
             // richTextContentControl1
             // 
             this.richTextContentControl1.DefaultDataSourceUpdateMode = System.Windows.Forms.DataSourceUpdateMode.Never;
             // 
-            // richTextContentControl2
-            // 
-            this.richTextContentControl2.DefaultDataSourceUpdateMode = System.Windows.Forms.DataSourceUpdateMode.Never;
-            // 
             // richTextContentControl3
             // 
             this.richTextContentControl3.DefaultDataSourceUpdateMode = System.Windows.Forms.DataSourceUpdateMode.Never;
+            // 
+            // plainTextContentControl6
+            // 
+            this.plainTextContentControl6.DefaultDataSourceUpdateMode = System.Windows.Forms.DataSourceUpdateMode.Never;
+            // 
+            // plainTextContentControl8
+            // 
+            this.plainTextContentControl8.DefaultDataSourceUpdateMode = System.Windows.Forms.DataSourceUpdateMode.Never;
             // 
             // ThisDocument
             // 
@@ -231,10 +231,10 @@ namespace WordReportTemplate {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "16.0.0.0")]
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
         protected override void OnShutdown() {
+            this.plainTextContentControl8.Dispose();
+            this.plainTextContentControl6.Dispose();
             this.richTextContentControl3.Dispose();
-            this.richTextContentControl2.Dispose();
             this.richTextContentControl1.Dispose();
-            this.plainTextContentControl5.Dispose();
             this.plainTextContentControl4.Dispose();
             this.plainTextContentControl2.Dispose();
             this.plainTextContentControl1.Dispose();
