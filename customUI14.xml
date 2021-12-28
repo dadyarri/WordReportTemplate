@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="OnLoad">
+  <ribbon>
+    <tabs>
+      <tab id="TabReport" label="Отчёт" insertBeforeMso="TabHome">
+        <group id="TabReportCommon" label="Общее" autoScale="true">
+            <control idMso="MacroPlay" visible="true"/>
+            <gallery idMso="BulletsGalleryWord" showInRibbon="false" visible="true"/>
+            <gallery idMso="NumberingGalleryWord" showInRibbon="false" visible="true"/>
+            <gallery idMso="ListLevelGallery" showInRibbon="false" visible="true"/>
+            <control idMso="ParagraphMarks" visible="true"/>
+        </group>
+        <group id="TabReportStructure" label="Структура" autoScale="true">
+            <button id="CreateStructureElement" imageMso="AppointmentColor1" onAction="FormatAsStructureElementStyle" visible="true" label="Структурный элемент"/>
+            <button id="CreateChapterElement" imageMso="AppointmentColor2" onAction="InsertChapter" visible="true" label="Раздел"/>
+            <button id="CreateSubChapterElement" imageMso="AppointmentColor3" onAction="InsertSubChapter" visible="true" label="Подраздел"/>
+            <button id="CreatePointElement" imageMso="AppointmentColor4" onAction="InsertPoint" visible="true" label="Пункт"/>
+            <button id="CreateSubPointElement" imageMso="AppointmentColor5" onAction="InsertSubPoint" visible="true" label="Подпункт"/>
+            <button id="ApplyDefaultStyle" imageMso="AppointmentColor0" onAction="FormatAsDefault" visible="true" label="Текст"/>
+            <button id="HighlightElement" imageMso="TraceError" onAction="FormatAsHighlightedText" visible="true" label="Выделить шрифтом"/>
+            <button id="CreateAppendix" imageMso="AppointmentColor10" onAction="InsertAppendix" visible="true" label="Приложение"/>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
