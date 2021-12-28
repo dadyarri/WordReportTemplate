@@ -42,6 +42,7 @@
 				<group id="TabReportText" label="Текстовые поля" autoScale="true">
 					<button id="ClearFields" label="Удалить текстовые поля в абзаце" imageMso="CancelRequest" onAction="ClearFields" visible="true"/>
 					<button id="InputLink" label="Вставить ярлык" imageMso="QueryUnionQuery" onAction="InputLink" visible="true"/>
+          <checkBox id="ToggleFontCheckBox" label="Включить новый шрифт" onAction="ToggleNewFont" visible="true"/>
 				</group>
 				<group id="TabReportBiblography" label="Библиография" autoScale="true">
 					<button idQ="AddBibliographyBtn" label="Вставить пункт" imageMso="OutlineDemoteToBodyText" onAction="InsertBibliographyItem" visible="true"/>
