@@ -1,203 +1,137 @@
-' ========================================
-' EXPERIMENTAL
-' ========================================
+Dim LastLink        As String
 
-Option Explicit
-Dim LastLink As String
+Sub OnLoad(ribbon   As IRibbonUI)
+End Sub
 
-' ========================================
-' INTERNAL
-' ========================================
-
-Private Sub StartNewPar()
-
-    Call GotoBeginPar
+Private Sub insertNewParagraph()
+    Call goToBeginningOfParagraph 
     Selection.TypeText Text:=vbNewLine
     Selection.MoveLeft Unit:=wdCharacter, Count:=1
     
 End Sub
 
-Private Sub GotoEndPar()
-
-  Selection.MoveLeft Unit:=wdCharacter, Count:=1
-  Selection.MoveDown Unit:=wdParagraph, Count:=1
-  
-End Sub
-Private Sub GotoBeginPar()
-
-  Selection.MoveRight Unit:=wdCharacter, Count:=1
-  Selection.MoveUp Unit:=wdParagraph, Count:=1
-  
+Private Sub goToBeginningOfParagraph 
+    Selection.MoveRight Unit:=wdCharacter, Count:=1
+    Selection.MoveUp Unit:=wdParagraph, Count:=1
+    
 End Sub
 
-Private Function AskLink() As String
-    LastLink = InputBox(Prompt:="ßðëûê äëÿ îáúåêòà", Title:="Çàäàòü ÿðëûê")
-    AskLink = LastLink
-End Function
+Private Sub goToEndOfParagraph()
+    Selection.MoveRight Unit:=wdCharacter, Count:=1
+    Selection.MoveDown Unit:=wdParagraph, Count:=1
+End Sub
 
-Private Function ProposeLink() As String
-    ProposeLink = InputBox(Prompt:="ßðëûê äëÿ âñòàâêè", Title:="Çàäàòü ÿðëûê", Default:=LastLink)
-End Function
-
-Private Sub RefreshFields()
+Private Sub refreshFields()
     Selection.Paragraphs(1).Range.Fields.Update
 End Sub
-' ========================================
-' LINKS
-' ========================================
+
+Private Function askForLink()
+    LastLink = InputBox(Prompt:="Ярлык для объекта", Title:="Задать ярлык")
+    askForLink = LastLink
+End Function
+
+Private Function proposeLink()
+    proposeLink = InputBox(Prompt:="Ярлык для вставки", Title:="Задать ярлык",Default:=LastLink)
+End Function
 
 Sub InputLink()
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="ref " & ProposeLink()
+    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="ref " & ProposeLink()
 End Sub
 
-' ========================================
-' COUNTING
-' ========================================
-
-Sub InsAbstract()
-
-    ' reset count fields
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq cfig \r 0 \h"
-        
-    Selection.TypeText Text:="Îò÷åò âûïîëíåí â 1 ÷àñòè è ñîäåðæèò: ñòðàíèö — "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="numpages"
-    Selection.TypeText Text:=", èëëþñòðàöèé — "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="ref totfig"
-    Selection.TypeText Text:=", òàáëèö — "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="ref tottbl"
-    Selection.TypeText Text:=", ïðèëîæåíèé — "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="ref totapx"
-    Selection.TypeText Text:=", â îò÷åòå èñïîëüçîâàíî èñòî÷íèêîâ — "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="ref totbib"
-    Selection.TypeText Text:="."
+Sub InsertAbstract(control As IRibbonControl)
+    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="seq cfig \r 0 \h"
     
+    Selection.TypeText Text:="Отчёт выполнен в 1 части и содержит: страниц — "
+    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="numpages"
+    Selection.TypeText Text:=", иллюстраций — "
+    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty,PreserveFormatting:=False, Text:="ref totfig"
+    Selection.TypeText Text:=", таблиц — "
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="ref tottbl"
+    Selection.TypeText Text:=", приложений — "
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="ref totapx"
+    Selection.TypeText Text:=", в отчёте использовано источников — "
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="ref totbib"
+    Selection.TypeText Text:="."
 End Sub
 
-Sub InsEndCounters()
+Sub InsertEndingCounters(control As IRibbonControl)
     Selection.EndKey Unit:=wdStory
-    ' count figures
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set totfig "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-            PreserveFormatting:=False, Text:="seq cfig \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq cfig \c"
     Selection.EndKey Unit:=wdLine
-    ' count tables
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set tottbl "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-            PreserveFormatting:=False, Text:="seq ctbl \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ctbl \c"
     Selection.EndKey Unit:=wdLine
-    ' count equations
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set toteq "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-            PreserveFormatting:=False, Text:="seq ceq \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ceq \c"
     Selection.EndKey Unit:=wdLine
-    ' count biblio
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set totbib "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-            PreserveFormatting:=False, Text:="seq cbib \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq cbib \c"
     Selection.EndKey Unit:=wdLine
-    ' count appendixes
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set totapx "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-            PreserveFormatting:=False, Text:="seq capx \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq capx \c"
     Selection.EndKey Unit:=wdLine
-
 End Sub
 
-' ========================================
-' FIGURES
-' ========================================
-
-Sub InsFigName()
-
+Sub InsertFigureNameChapterNumber(control As IRibbonControl)
+    
     Selection.TypeText Text:=vbNewLine
-
-    Selection.Style = ActiveDocument.Styles("Íàçâàíèå ðèñóíêà")
-    Selection.TypeText Text:="Ðèñóíîê "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq ch \c"
+    
+    Selection.Style = ActiveDocument.Styles("Название рисунка")
+    Selection.TypeText Text:="Рисунок "
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ch \c"
     Selection.TypeText Text:="."
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq fig \n"
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq cfig \n \h"
-        
-    Dim Link As String
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq fig \n"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq cfig \n \h"
+    
+    Dim Link        As String
     Link = AskLink()
     
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set " & Link & " """
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq ch \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ch \c"
     Selection.TypeText Text:="."
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq fig \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq fig \c"
     Selection.TypeText Text:=""""
     Selection.MoveRight Unit:=wdCharacter, Count:=2
-        
+    
     Selection.TypeText Text:=" — "
-
-    Call RefreshFields
+    
+    Call refreshFields()
 End Sub
 
-Sub InsFigNameWholeDoc()
-
+Sub InsertFigureNameEndToEndNumber(control As IRibbonControl)
+    
     Selection.TypeText Text:=vbNewLine
-
-    Selection.Style = ActiveDocument.Styles("Íàçâàíèå ðèñóíêà")
-    Selection.TypeText Text:="Ðèñóíîê "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq wfig \n"
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq cfig \n \h"
-        
-    Dim Link As String
+    
+    Selection.Style = ActiveDocument.Styles("Название рисунка")
+    Selection.TypeText Text:="Рисунок "
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq wfig \n"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq cfig \n \h"
+    
+    Dim Link        As String
     Link = AskLink()
     
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set " & Link & " """
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq wfig \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq wfig \c"
     Selection.TypeText Text:=""""
     Selection.MoveRight Unit:=wdCharacter, Count:=2
-        
-    Selection.TypeText Text:=" — "
-
-    Call RefreshFields
-End Sub
-
-Sub FormatFig()
-
-    Selection.Style = ActiveDocument.Styles("Èçîáðàæåíèå ðèñóíêà")
     
+    Selection.TypeText Text:=" — "
+    
+    Call refreshFields()
 End Sub
 
-' ========================================
-' TABLES
-' ========================================
-
-Private Sub SetTableBottomMargin()
-
+Private Sub setTableBottomMargin()
+    
     With Selection.Tables(1).Rows
-        .WrapAroundText = True
+        .WrapAroundText = TRUE
         .HorizontalPosition = wdTableCenter
         .RelativeHorizontalPosition = wdRelativeHorizontalPositionColumn
         .DistanceLeft = CentimetersToPoints(0.32)
@@ -206,321 +140,254 @@ Private Sub SetTableBottomMargin()
         .RelativeVerticalPosition = wdRelativeVerticalPositionParagraph
         .DistanceTop = CentimetersToPoints(0)
         .DistanceBottom = CentimetersToPoints(0.5)
-        .AllowOverlap = False
+        .AllowOverlap = FALSE
     End With
     
 End Sub
 
-
-Sub InsTblName()
-
-    Selection.Style = ActiveDocument.Styles("Íàçâàíèå òàáëèöû")
-    Selection.TypeText Text:="Òàáëèöà "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq ch \c"
-    Selection.TypeText Text:="."
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq tbl \n"
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq ctbl \n \h"
+Sub InsertTableNameChapterNumber(control As IRibbonControl)
     
-    Dim Link As String
+    Selection.Style = ActiveDocument.Styles("Название таблицы")
+    Selection.TypeText Text:="Таблица "
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ch \c"
+    Selection.TypeText Text:="."
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq tbl \n"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ctbl \n \h"
+    
+    Dim Link        As String
     Link = AskLink()
     
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set " & Link & " """
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq ch \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ch \c"
     Selection.TypeText Text:="."
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq tbl \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq tbl \c"
     Selection.TypeText Text:=""""
     Selection.MoveRight Unit:=wdCharacter, Count:=2
     
     Selection.TypeText Text:=" — "
     
-    Call RefreshFields
+    Call refreshFields()
 End Sub
 
-Sub InsTblNameWholeDocument()
-
-    Selection.Style = ActiveDocument.Styles("Íàçâàíèå òàáëèöû")
-    Selection.TypeText Text:="Òàáëèöà "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq wtbl \n"
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq ctbl \n \h"
+Sub InsertTableNameEndToEndNumber(control As IRibbonControl)
     
-    Dim Link As String
+    Selection.Style = ActiveDocument.Styles("Название таблицы")
+    Selection.TypeText Text:="Таблица "
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq wtbl \n"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ctbl \n \h"
+    
+    Dim Link        As String
     Link = AskLink()
     
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set " & Link & " """
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq wtbl \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq wtbl \c"
     Selection.TypeText Text:=""""
     Selection.MoveRight Unit:=wdCharacter, Count:=2
     
     Selection.TypeText Text:=" — "
     
-    Call RefreshFields
+    Call refreshFields()
 End Sub
 
-Sub FormatTable()
-    Selection.Tables(1).Range.Style = ActiveDocument.Styles("Òåêñò òàáëèöû")
-    Selection.Tables(1).Columns(1).Select
-    Selection.Style = ActiveDocument.Styles("Áîêîâèê òàáëèöû")
-    Selection.Tables(1).Rows(1).Range.Style = ActiveDocument.Styles("Çàãîëîâîê ãðàôû")
-    Selection.Tables(1).Rows(1).HeadingFormat = True
-    Call SetTableBottomMargin
-End Sub
-
-' ========================================
-' ---
-' ========================================
-
-Sub ApplyStrElement()
-
-    Selection.Style = ActiveDocument.Styles("Çàãîëîâîê ñòðóêòóðíîãî ýëåìåíòà")
+Sub InsertEquationChapterNumber(control As IRibbonControl)
     
-End Sub
-
-Sub ApplyDefault()
-
-    Selection.Style = ActiveDocument.Styles("Îáû÷íûé")
-    
-End Sub
-
-Sub ApplyFontHighlight()
-
-    Selection.Style = ActiveDocument.Styles("Âûäåëèòü òåêñò øðèôòîì")
-    
-End Sub
-
-Sub ClearFields()
-
-    Selection.Paragraphs(1).Range.Select
-    Selection.Fields.Unlink
-    
-End Sub
-
-' ========================================
-' EQUATIONS
-' ========================================
-
-Sub InsEq()
-
-    Call StartNewPar
-    Selection.Style = ActiveDocument.Styles("Óðàâíåíèå")
+    Call insertNewParagraph()
+    Selection.Style = ActiveDocument.Styles("Уравнение")
     Selection.TypeText Text:="("
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq ch \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ch \c"
     Selection.TypeText Text:="."
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq eq \n"
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq ceq \n \h"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq eq \n"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ceq \n \h"
     Selection.TypeText Text:=")"
     Selection.HomeKey Unit:=wdLine
     Selection.TypeText Text:=vbTab & vbTab
     Selection.MoveLeft Unit:=wdCharacter, Count:=1
     
-    Call RefreshFields
+    Call refreshFields()
 End Sub
 
-Sub InsEqWholeDocument()
-
-    Call StartNewPar
-    Selection.Style = ActiveDocument.Styles("Óðàâíåíèå")
+Sub InsertEquationEndToEndNumber(control As IRibbonControl)
+    
+    Call insertNewParagraph()
+    Selection.Style = ActiveDocument.Styles("Уравнение")
     Selection.TypeText Text:="("
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq weq \n"
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq ceq \n \h"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq weq \n"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ceq \n \h"
     Selection.TypeText Text:=")"
     Selection.HomeKey Unit:=wdLine
     Selection.TypeText Text:=vbTab & vbTab
     Selection.MoveLeft Unit:=wdCharacter, Count:=1
     
-    Call RefreshFields
+    Call refreshFields()
 End Sub
 
-Sub InsEqDesc()
+Sub InsertEquationDescription(control As IRibbonControl)
     
-    Call GotoEndPar
+    Call goToEndOfParagraph()
     Selection.TypeText Text:=vbNewLine
     Selection.MoveLeft Unit:=wdCharacter, Count:=1
-    Selection.Style = ActiveDocument.Styles("Ïîäïèñü óðàâíåíèÿ")
+    Selection.Style = ActiveDocument.Styles("Подпись уравнения")
     Selection.TypeText Text:=vbTab & vbTab & "—" & vbTab
     Selection.MoveLeft Unit:=wdCharacter, Count:=3
     
 End Sub
 
-Sub InsEqLink()
+Sub InsertEquationLink(control As IRibbonControl)
     Selection.EndKey Unit:=wdLine
     Selection.MoveLeft Unit:=wdCharacter, Count:=1
     
-    Dim Link As String
+    Dim Link        As String
     Link = AskLink()
     
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set " & Link & " """
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq ch \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ch \c"
     Selection.TypeText Text:="."
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq eq \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq eq \c"
     Selection.TypeText Text:=""""
     Selection.MoveRight Unit:=wdCharacter, Count:=2
     
-    Call RefreshFields
+    Call refreshFields()
 End Sub
 
-' ========================================
-' CHAPTERS
-' ========================================
-
-Sub InsCh()
-    Call ClearFields
-    Call GotoBeginPar
-    Selection.Style = ActiveDocument.Styles("Ðàçäåë")
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq ch \n"
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq subch \r 0 \h"
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq eq \r 0 \h"
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq tbl \r 0 \h"
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq fig \r 0 \h"
+Sub InsertChapter(control As IRibbonControl)
+    ClearFields 
+    Call goToBeginningOfParagraph 
+    Selection.Style = ActiveDocument.Styles("Раздел")
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ch \n"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq subch \r 0 \h"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq eq \r 0 \h"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq tbl \r 0 \h"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq fig \r 0 \h"
     Selection.TypeText Text:=" "
     
-    Call RefreshFields
+    Call refreshFields()
 End Sub
 
-Sub InsSubch()
-    Call ClearFields
-    Call GotoBeginPar
-    Selection.Style = ActiveDocument.Styles("Ïîäðàçäåë")
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq ch \c"
+Sub InsertSubChapter(control As IRibbonControl)
+    ClearFields 
+    Call goToBeginningOfParagraph 
+    Selection.Style = ActiveDocument.Styles("Подраздел")
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ch \c"
     Selection.TypeText Text:="."
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq subch \n"
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq pnt \r 0 \h"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq subch \n"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq pnt \r 0 \h"
     Selection.TypeText Text:=" "
     
-    Call RefreshFields
+    Call refreshFields()
 End Sub
 
-Sub InsPnt()
-    Call ClearFields
-    Call GotoBeginPar
-    Selection.Style = ActiveDocument.Styles("Ïóíêò")
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq ch \c"
+Sub InsertPoint(control As IRibbonControl)
+    ClearFields 
+    Call goToBeginningOfParagraph
+    Selection.Style = ActiveDocument.Styles("Пункт")
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ch \c"
     Selection.TypeText Text:="."
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq subch \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq subch \c"
     Selection.TypeText Text:="."
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq pnt \n"
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq subpnt \r 0 \h"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq pnt \n"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq subpnt \r 0 \h"
     Selection.TypeText Text:=" "
     
-    Call RefreshFields
+    Call refreshFields
 End Sub
 
-Sub InsSubpnt()
-    Call ClearFields
-    Call GotoBeginPar
-    Selection.Style = ActiveDocument.Styles("Ïîäïóíêò")
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq ch \c"
+Sub InsertSubPoint(control As IRibbonControl)
+    ClearFields
+    Call goToBeginningOfParagraph 
+    Selection.Style = ActiveDocument.Styles("Подпункт")
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False, Text:="seq ch \c"
     Selection.TypeText Text:="."
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq subch \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq subch \c"
     Selection.TypeText Text:="."
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq pnt \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq pnt \c"
     Selection.TypeText Text:="."
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq subpnt \n"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq subpnt \n"
     Selection.TypeText Text:=" "
     
-    Call RefreshFields
+    Call refreshFields()
 End Sub
 
-Sub InsApx()
-
-    Dim Link As String
-    Link = AskLink()
-
-    Selection.Style = ActiveDocument.Styles("Ïðèëîæåíèå")
-    Selection.TypeText Text:="Ïðèëîæåíèå "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False
+Sub InsertAppendix(control As IRibbonControl)
+    
+    Dim Link        As String
+    Link = askForLink()
+    
+    Selection.Style = ActiveDocument.Styles("Приложение")
+    Selection.TypeText Text:="Приложение "
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="symbol "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="= "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="seq apx \n"
     Selection.MoveRight Unit:=wdCharacter, Count:=2
     Selection.TypeText Text:=" + 1039"
     Selection.MoveRight Unit:=wdCharacter, Count:=2
     Selection.TypeText Text:=" \u"
-    Selection.Fields.Update
+    Selection.Fields.Update 
     Selection.EndKey Unit:=wdLine
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq capx \n \h"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq capx \n \h"
     
-    Call RefreshFields
+    Call refreshFields()
     
 End Sub
 
-' ========================================
-' BIBLIO
-' ========================================
-
-Sub InsBib()
-
-    Dim Link As String
+Sub InsertBibliographyItem(control As IRibbonControl)
+    
+    Dim Link        As String
     Link = AskLink()
     
-    Call StartNewPar
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq bib \n"
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq cbib \n \h"
+    Call insertNewParagraph()
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq bib \n"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq cbib \n \h"
     
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set " & Link & " """
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, _
-        PreserveFormatting:=False, Text:="seq bib \c"
+    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq bib \c"
     Selection.TypeText Text:=""""
     
     Selection.MoveRight Unit:=wdCharacter, Count:=2
     Selection.TypeText Text:=". "
     
-    Call RefreshFields
+    Call refreshFields()
     
 End Sub
 
-' ========================================
-' EXPERIMENTAL
-' ========================================
-
-Sub SplitTable()
-    Selection.Tables(1).Split BeforeRow:=True
-    Selection.MoveUp Unit:=wdLine, Count:=1
+Sub FormatAsFigure(control As IRibbonControl)
+    Selection.Style = ActiveDocument.Styles("Изображение рисунка")
+    
 End Sub
 
+Sub FormatAsTable(control As IRibbonControl)
+    Selection.Tables(1).Range.Style = ActiveDocument.Styles("Текст таблицы")
+    Selection.Tables(1).Columns(1).Select
+    Selection.Style = ActiveDocument.Styles("Боковик таблицы")
+    Selection.Tables(1).Rows(1).Range.Style = ActiveDocument.Styles("Заголовок графы")
+    Selection.Tables(1).Rows(1).HeadingFormat = TRUE
+    Call setTableBottomMargin
+End Sub
+
+Sub FormatAsStructureElementStyle(control As IRibbonControl)
+    
+    Selection.Style = ActiveDocument.Styles("Заголовок структурного элемента")
+    
+End Sub
+
+Sub FormatAsDefault(control As IRibbonControl)
+    Selection.Style = ActiveDocument.Styles("Обычный")
+    
+End Sub
+
+Sub FormatAsHighlightedText(control As IRibbonControl)
+    Selection.Style = ActiveDocument.Styles("Выделить текст шрифтом")
+    
+End Sub
+
+Sub ClearFields
+    Selection.Paragraphs(1).Range.Select
+    Selection.Fields.Unlink
+    
+End Sub
