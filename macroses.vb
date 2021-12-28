@@ -34,7 +34,7 @@ Private Function proposeLink()
     proposeLink = InputBox(Prompt:="Ярлык для вставки", Title:="Задать ярлык",Default:=LastLink)
 End Function
 
-Sub InputLink()
+Sub InputLink(control As IRibbonControl)
     Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="ref " & ProposeLink()
 End Sub
 
@@ -253,7 +253,7 @@ Sub InsertEquationLink(control As IRibbonControl)
 End Sub
 
 Sub InsertChapter(control As IRibbonControl)
-    ClearFields 
+    ClearFields control
     Call goToBeginningOfParagraph 
     Selection.Style = ActiveDocument.Styles("Раздел")
     Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ch \n"
@@ -267,7 +267,7 @@ Sub InsertChapter(control As IRibbonControl)
 End Sub
 
 Sub InsertSubChapter(control As IRibbonControl)
-    ClearFields 
+    ClearFields control
     Call goToBeginningOfParagraph 
     Selection.Style = ActiveDocument.Styles("Подраздел")
     Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ch \c"
@@ -280,7 +280,7 @@ Sub InsertSubChapter(control As IRibbonControl)
 End Sub
 
 Sub InsertPoint(control As IRibbonControl)
-    ClearFields 
+    ClearFields control
     Call goToBeginningOfParagraph
     Selection.Style = ActiveDocument.Styles("Пункт")
     Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ch \c"
@@ -295,7 +295,7 @@ Sub InsertPoint(control As IRibbonControl)
 End Sub
 
 Sub InsertSubPoint(control As IRibbonControl)
-    ClearFields
+    ClearFields control
     Call goToBeginningOfParagraph 
     Selection.Style = ActiveDocument.Styles("Подпункт")
     Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False, Text:="seq ch \c"
@@ -361,14 +361,14 @@ Sub FormatAsFigure(control As IRibbonControl)
     
 End Sub
 
-Sub FormatAsTable(control As IRibbonControl)
-    Selection.Tables(1).Range.Style = ActiveDocument.Styles("Текст таблицы")
-    Selection.Tables(1).Columns(1).Select
-    Selection.Style = ActiveDocument.Styles("Боковик таблицы")
-    Selection.Tables(1).Rows(1).Range.Style = ActiveDocument.Styles("Заголовок графы")
-    Selection.Tables(1).Rows(1).HeadingFormat = TRUE
-    Call setTableBottomMargin
-End Sub
+' Sub FormatAsTable(control As IRibbonControl)
+'     Selection.Tables(1).Range.Style = ActiveDocument.Styles("Текст таблицы")
+'     Selection.Tables(1).Columns(1).Select
+'     Selection.Style = ActiveDocument.Styles("Боковик таблицы")
+'     Selection.Tables(1).Rows(1).Range.Style = ActiveDocument.Styles("Заголовок графы")
+'     Selection.Tables(1).Rows(1).HeadingFormat = TRUE
+'     Call setTableBottomMargin
+' End Sub
 
 Sub FormatAsStructureElementStyle(control As IRibbonControl)
     
@@ -386,7 +386,7 @@ Sub FormatAsHighlightedText(control As IRibbonControl)
     
 End Sub
 
-Sub ClearFields
+Sub ClearFields(control As IRibbonControl)
     Selection.Paragraphs(1).Range.Select
     Selection.Fields.Unlink
     
