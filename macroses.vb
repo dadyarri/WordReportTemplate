@@ -391,3 +391,17 @@ Sub ClearFields(control As IRibbonControl)
     Selection.Fields.Unlink
     
 End Sub
+
+Sub ToggleNewFont(control As IRibbonControl, Pressed As Boolean)
+
+    Dim newFont as String
+
+    if Pressed Then
+        newFont = "PT Astra Serif"
+    Else
+        newFont = "Times New Roman"
+    End If
+
+    ActiveDocument.Styles(wdStyleNormal).Font.Name = newFont
+
+End Sub
