@@ -11,20 +11,30 @@
             <control idMso="ParagraphMarks" visible="true"/>
         </group>
         <group id="TabReportStructure" label="Структура" autoScale="true">
-            <button id="CreateStructureElement" imageMso="AppointmentColor1" onAction="FormatAsStructureElementStyle" visible="true" label="Структурный элемент"/>
-            <button id="CreateChapterElement" imageMso="AppointmentColor2" onAction="InsertChapter" visible="true" label="Раздел"/>
-            <button id="CreateSubChapterElement" imageMso="AppointmentColor3" onAction="InsertSubChapter" visible="true" label="Подраздел"/>
-            <button id="CreatePointElement" imageMso="AppointmentColor4" onAction="InsertPoint" visible="true" label="Пункт"/>
-            <button id="CreateSubPointElement" imageMso="AppointmentColor5" onAction="InsertSubPoint" visible="true" label="Подпункт"/>
-            <button id="ApplyDefaultStyle" imageMso="AppointmentColor0" onAction="FormatAsDefault" visible="true" label="Текст"/>
-            <button id="HighlightElement" imageMso="TraceError" onAction="FormatAsHighlightedText" visible="true" label="Выделить шрифтом"/>
-            <button id="CreateAppendix" imageMso="AppointmentColor10" onAction="InsertAppendix" visible="true" label="Приложение"/>
+            <gallery id="StructureGroup"
+                     label="Структурные элементы"
+                     imageMso="CreateModule" 
+                     size="large"
+                     columns="4" 
+                     rows="2" 
+                     itemHeight="30" 
+                     itemWidth="30" 
+                     screentip="Вставка структурных элементов">
+                <button id="CreateStructureElement" imageMso="AppointmentColor1" onAction="FormatAsStructureElementStyle" visible="true" label="Структурный элемент"/>
+                <button id="CreateChapterElement" imageMso="AppointmentColor2" onAction="InsertChapter" visible="true" label="Раздел"/>
+                <button id="CreateSubChapterElement" imageMso="AppointmentColor3" onAction="InsertSubChapter" visible="true" label="Подраздел"/>
+                <button id="CreatePointElement" imageMso="AppointmentColor4" onAction="InsertPoint" visible="true" label="Пункт"/>
+                <button id="CreateSubPointElement" imageMso="AppointmentColor5" onAction="InsertSubPoint" visible="true" label="Подпункт"/>
+                <button id="ApplyDefaultStyle" imageMso="AppointmentColor0" onAction="FormatAsDefault" visible="true" label="Текст"/>
+                <button id="HighlightElement" imageMso="TraceError" onAction="FormatAsHighlightedText" visible="true" label="Выделить шрифтом"/>
+                <button id="CreateAppendix" imageMso="AppointmentColor10" onAction="InsertAppendix" visible="true" label="Приложение"/>
+            </gallery>
         </group>
         <group id="TabReportPictures" label="Рисунки" autoScale="true">
 					<control idMso="PictureInsertFromFile" visible="true"/>
 					<button id="FormatFigure" label="Стиль рисунка" imageMso="OutlineDemoteToBodyText" onAction="FormatAsFigure" visible="true"/>
 					<button id="InsertFigureNameBtn" label="Подпись" imageMso="MailMergeResultsPreview" onAction="InsertFigureNameChapterNumber" visible="true"/>
-					<button idQ="InsertFigureNameEndToEndBtn" label="Подпись (сквозной)" imageMso="MailMergeResultsPreview" onAction="InsertFigureNameEndToEndNumber" visible="true"/>
+					<button id="InsertFigureNameEndToEndBtn" label="Подпись (сквозной)" imageMso="MailMergeResultsPreview" onAction="InsertFigureNameEndToEndNumber" visible="true"/>
 				</group>
         <group id="TabReportEquations" label="Формулы" autoScale="true">
 					<button id="InsertEquationBtn" label="Уравнение" imageMso="OutlineDemoteToBodyText" onAction="InsertEquationChapterNumber" visible="true"/>
@@ -42,7 +52,7 @@
 				<group id="TabReportText" label="Текстовые поля" autoScale="true">
 					<button id="ClearFields" label="Удалить текстовые поля в абзаце" imageMso="CancelRequest" onAction="ClearFields" visible="true"/>
 					<button id="InputLink" label="Вставить ярлык" imageMso="QueryUnionQuery" onAction="InputLink" visible="true"/>
-          <checkBox id="ToggleFontCheckBox" label="Включить новый шрифт" onAction="ToggleNewFont" visible="true"/>
+					<checkBox id="ToggleFontCheckBox" label="Включить новый шрифт" onAction="ToggleNewFont" visible="true"/>
 				</group>
 				<group id="TabReportBiblography" label="Библиография" autoScale="true">
 					<button idQ="AddBibliographyBtn" label="Вставить пункт" imageMso="OutlineDemoteToBodyText" onAction="InsertBibliographyItem" visible="true"/>
