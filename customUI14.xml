@@ -20,6 +20,12 @@
             <button id="HighlightElement" imageMso="TraceError" onAction="FormatAsHighlightedText" visible="true" label="Выделить шрифтом"/>
             <button id="CreateAppendix" imageMso="AppointmentColor10" onAction="InsertAppendix" visible="true" label="Приложение"/>
         </group>
+        <group id="TabReportPictures" label="Рисунки" autoScale="true">
+					<control idMso="PictureInsertFromFile" visible="true"/>
+					<button id="FormatFigure" label="Стиль рисунка" imageMso="OutlineDemoteToBodyText" onAction="FormatAsFigure" visible="true"/>
+					<button id="InsertFigureNameBtn" label="Подпись" imageMso="MailMergeResultsPreview" onAction="InsertFigureNameChapterNumber" visible="true"/>
+					<button idQ="InsertFigureNameEndToEndBtn" label="Подпись (сквозной)" imageMso="MailMergeResultsPreview" onAction="InsertFigureNameEndToEndNumber" visible="true"/>
+				</group>
       </tab>
     </tabs>
   </ribbon>
