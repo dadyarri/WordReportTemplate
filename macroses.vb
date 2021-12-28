@@ -90,7 +90,7 @@ Sub InsertFigureNameChapterNumber(control As IRibbonControl)
     Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq cfig \n \h"
     
     Dim Link        As String
-    Link = AskLink()
+    Link = askForLink()
     
     Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set " & Link & " """
@@ -115,7 +115,7 @@ Sub InsertFigureNameEndToEndNumber(control As IRibbonControl)
     Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq cfig \n \h"
     
     Dim Link        As String
-    Link = AskLink()
+    Link = askForLink()
     
     Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set " & Link & " """
@@ -155,7 +155,7 @@ Sub InsertTableNameChapterNumber(control As IRibbonControl)
     Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ctbl \n \h"
     
     Dim Link        As String
-    Link = AskLink()
+    Link = askForLink()
     
     Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set " & Link & " """
@@ -178,7 +178,7 @@ Sub InsertTableNameEndToEndNumber(control As IRibbonControl)
     Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq ctbl \n \h"
     
     Dim Link        As String
-    Link = AskLink()
+    Link = askForLink()
     
     Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set " & Link & " """
@@ -239,7 +239,7 @@ Sub InsertEquationLink(control As IRibbonControl)
     Selection.MoveLeft Unit:=wdCharacter, Count:=1
     
     Dim Link        As String
-    Link = AskLink()
+    Link = askForLink()
     
     Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False
     Selection.TypeText Text:="set " & Link & " """
@@ -338,7 +338,7 @@ End Sub
 Sub InsertBibliographyItem(control As IRibbonControl)
     
     Dim Link        As String
-    Link = AskLink()
+    Link = askForLink()
     
     Call insertNewParagraph()
     Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="seq bib \n"
