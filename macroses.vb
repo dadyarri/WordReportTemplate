@@ -41,17 +41,17 @@ End Sub
 Sub InsertAbstract(control As IRibbonControl)
     Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="seq cfig \r 0 \h"
     
-    Selection.TypeText Text:="Отчёт выполнен в 1 части и содержит: страниц — "
+    Selection.TypeText Text:="Отчёт содержит: "
     Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="numpages"
-    Selection.TypeText Text:=", иллюстраций — "
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty,PreserveFormatting:=False, Text:="ref totfig"
-    Selection.TypeText Text:=", таблиц — "
-    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="ref tottbl"
-    Selection.TypeText Text:=", приложений — "
-    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="ref totapx"
-    Selection.TypeText Text:=", в отчёте использовано источников — "
-    Selection.Fields.Add Range:=Selection.Range,Type:=wdFieldEmpty,PreserveFormatting:=False,Text:="ref totbib"
-    Selection.TypeText Text:="."
+    Selection.TypeText Text:=" страниц, "
+    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="ref totfig"
+    Selection.TypeText Text:=" рисунков, "
+    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="ref tottbl"
+    Selection.TypeText Text:=" таблиц, "
+    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="ref totapx"
+    Selection.TypeText Text:=" приложений, "
+    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="ref totbib"
+    Selection.TypeText Text:=" источников литературы."
 End Sub
 
 Sub InsertEndingCounters(control As IRibbonControl)
