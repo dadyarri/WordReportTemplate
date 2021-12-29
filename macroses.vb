@@ -52,6 +52,18 @@ Sub InsertAbstract(control As IRibbonControl)
     Selection.TypeText Text:=" приложений, "
     Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="ref totbib"
     Selection.TypeText Text:=" источников литературы."
+
+    Selection.TypeText Text:="In this diploma thesis is contained "
+    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="numpages"
+    Selection.TypeText Text:=" pages, "
+    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="ref totfig"
+    Selection.TypeText Text:=" illustrations, "
+    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="ref tottbl"
+    Selection.TypeText Text:=" tables, "
+    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="ref totapx"
+    Selection.TypeText Text:=" appendicies, "
+    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="ref totbib"
+    Selection.TypeText Text:=" bibliography."
 End Sub
 
 Sub InsertEndingCounters(control As IRibbonControl)
