@@ -15,8 +15,6 @@
                      label="Структурные элементы"
                      imageMso="CreateModule" 
                      size="large"
-                     columns="4" 
-                     rows="2" 
                      itemHeight="30" 
                      itemWidth="30" 
                      screentip="Вставка структурных элементов">
