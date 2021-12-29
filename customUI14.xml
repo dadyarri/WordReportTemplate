@@ -28,6 +28,7 @@
                 <button id="ApplyDefaultStyle" imageMso="AppointmentColor0" onAction="FormatAsDefault" visible="true" label="Текст"/>
                 <button id="HighlightElement" imageMso="TraceError" onAction="FormatAsHighlightedText" visible="true" label="Выделить шрифтом"/>
                 <button id="CreateAppendix" imageMso="AppointmentColor10" onAction="InsertAppendix" visible="true" label="Приложение"/>
+                <button id="CreateAbstract" imageMso="AppointmentColor6" onAction="InsertAbstract" visible="true" label="Аннотация"/>
             </gallery>
         </group>
         <group id="TabReportPictures" label="Рисунки" autoScale="true">
